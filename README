@@ -1,0 +1,8 @@
+This project contains following
+
+* bltool.c
+  This program patches the misc file.
+* Makefile
+  For use with gnu-make
+* updatezip
+  Folder contains an unsigned updade package. It is an AROMA installer script that pulls the misc partition, patches it with the above program and reflashes it

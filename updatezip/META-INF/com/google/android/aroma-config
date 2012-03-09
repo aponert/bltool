@@ -1,0 +1,117 @@
+##
+#
+# AROMA Installer - AROMA Configuration
+#       (c) 2011 by Ahmad Amarullah
+#           amarullz - xda-developers
+#           http://www.amarullz.com/
+#
+#       Version 1.10
+#
+# INFO:
+#   <aroma-assets> = META-INF/com/google/android/aroma
+#   <dp>           = Device Pixelate. WVGA/QHD = 3, HVGA = 2.
+#                    dp calculated with = round(min(width,height) / 160)
+#   <aroma-tmp>    = /tmp/aroma-data/
+#
+##
+calibrate("2.9508","15","1.8284","18","yes");
+
+##
+# Initializing Rom Information
+#
+ini_set("rom_name",             "BootloaderTool");
+ini_set("rom_version",          "1.0");
+ini_set("rom_author",           "theq86");
+ini_set("rom_device",           "HTC Wildfire S (Marvel)");
+
+
+anisplash(
+  # Number of Loop
+  3,
+  
+  # Frame 1 [ Image, duration in millisecond ]
+  "splash/ani4", 50,
+  "splash/ani3", 50,
+  "splash/ani2", 50,
+  "splash/ani1", 50
+);
+
+##
+# Show Menubox
+#
+menubox(
+  # Title
+    "Bootloader Mode",
+  
+  # Sub Title
+    "Select Mode",
+  
+  # Icon
+    "icons/install",
+    
+  # Will be saved in /tmp/aroma-data/type.prop
+    "type.prop",
+    
+  # Items ( per 3 arguments ): Title, Subtitle/description, Icon
+    # Item 1
+    "Unlock",    "Unlock Bootloader", "icons/install",
+    
+    # Item 2
+    "Lock",  "Lock Bootloader (guarantee mode)", "icons/install",
+
+    # Item 3
+    "Relock",  "Lock Bootloader (relock mode)", "icons/install",
+    
+    # Item 4
+    "Superversion",	"Flash RUU regardingless sw-version",	"icons/install"
+);
+
+#
+# WONT DO ANYTHING IN TEST BUILD
+#
+setvar("retstatus",
+  install(
+    "Installing",
+    "Installing AROMA INSTALLER...\nPlease Wait Until it Finished...",
+    "icons/install",
+    "Finished"
+  )
+);
+
+# Set Next Text fo Finish
+ini_set("text_next", "Finish");
+
+viewbox(
+  "Completed",
+    "<#080>Congratulation...</#>\n\n"+
+    "Bootloader set\n"+
+    "Press Finish, and Reboot your phone.\n\nThanks\n\n"+
+    "Installer Status: "+getvar("retstatus"),
+  "icons/info"
+);
+
+if
+  confirm(
+    # Arg 1
+      "Reboot",
+    
+    # Arg 2
+      "Reboot Now",
+    
+    # Arg 3
+      "icons/info",
+    
+    # Arg 4 (Yes)
+      "Reboot",
+      
+    # Arg 5 (No)
+      "No"
+  )=="yes"
+then
+  #
+  # reboot("onfinish");   - Reboot if anything finished
+  # reboot("now");        - Reboot Directly
+  # reboot("disable");    - If you set reboot("now") before, use this command to revert it.
+  #
+  reboot("onfinish");
+endif;

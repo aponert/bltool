@@ -1,0 +1,43 @@
+# 1 Unlock
+# 2 Lock
+# 3 Relock
+
+package_extract_dir("tools", "/tmp");
+run_program("/sbin/chmod", "777", "/tmp/bltool");
+run_program("/sbin/chmod", "777", "/tmp/flash_image");
+run_program("/sbin/chmod", "777", "/tmp/dump_image");
+
+if
+     file_getprop("/tmp/aroma-data/type.prop","selected") == "1"
+then
+	run_program("/tmp/dump_image", "misc", "/tmp/misc.img");
+	run_program("/tmp/bltool", "/tmp/misc.img", "unlock");
+	run_program("/tmp/flash_image", "misc", "/tmp/misc.img");
+endif;
+
+if
+     file_getprop("/tmp/aroma-data/type.prop","selected") == "2"
+then
+	run_program("/tmp/dump_image", "misc", "/tmp/misc.img");
+	run_program("/tmp/bltool", "/tmp/misc.img", "lock");
+	run_program("/tmp/flash_image", "misc", "/tmp/misc.img");	
+endif;
+
+if
+     file_getprop("/tmp/aroma-data/type.prop","selected") == "3"
+then
+	run_program("/tmp/dump_image", "misc", "/tmp/misc.img");
+	run_program("/tmp/bltool", "/tmp/misc.img", "relock");
+	run_program("/tmp/flash_image", "misc", "/tmp/misc.img");
+endif;
+
+if
+     file_getprop("/tmp/aroma-data/type.prop","selected") == "4"
+then
+	run_program("/tmp/dump_image", "misc", "/tmp/misc.img");
+	run_program("/tmp/bltool", "/tmp/misc.img", "superversion");
+	run_program("/tmp/flash_image", "misc", "/tmp/misc.img");
+endif;
+
+ui_print("@ Title");
+ui_print("Default Text");
