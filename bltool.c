@@ -37,7 +37,7 @@ int main(int argc, char *argv[])
 	} else {
 		fclose(misc);
 		quit:
-		printf("usage:\nswitchlock <file> <option>\nOptions: unlock|relock|lock|superversion\n");
+		printf("usage:\bltool <file> <option>\nOptions: unlock|relock|lock|superversion\n");
 		return 1;
 	}
 	
