@@ -11,12 +11,12 @@ int main(int argc, char *argv[])
 	}
 	
 	if(NULL == misc) {
-		printf("File could not be opened.\n");
+		fprintf(stderr, "File could not be opened.\n");
 		return 1;
 	}
 	
 	if(fseek(misc, 224L, SEEK_SET) != 0) {
-		printf("Could not find offset in file.\n");
+		fprintf(stderr, "Could not find offset in file.\n");
 		fclose(misc);
 		return 1;
 	}
@@ -37,11 +37,10 @@ int main(int argc, char *argv[])
 	} else {
 		fclose(misc);
 		quit:
-		printf("usage:bltool <file> <option>\nOptions: unlock|relock|lock|superversion\n");
+		fprintf(stderr, "usage:bltool <file> <option>\nOptions: unlock|relock|lock|superversion\n");
 		return 1;
 	}
 	
-	fflush(misc);
 	fclose(misc);
 	return 0;
 }
